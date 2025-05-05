@@ -60,5 +60,32 @@ function renderCart() {
   })
  }
 }
-renderCart()
+
+function addToCart(productId){
+  const product = products.find(item => item.id === productId);
+  const cartItem = cart.find(item => item.id === productId);
+  if(cartItem){
+    cartItem.quantity++;
+  }else{
+    cart.push({...product, quantity: 1});
+  }
+  renderCart()
+} 
+
+function removeCart(productId){
+  cart = cart.filter(item => item.id !== productId);
+  renderCart()
+}
+
+function changeQuantity(productId, change){
+  const cartItem = cart.find(item => item.id === productId);
+  if(cartItem){
+    cartItem.quantity += change;
+    if(cartItem.quantity <= 0){
+      removeCart(productId);
+    }else{
+      renderCart()
+    }
+  }
+}
 renderProducts()
