@@ -35,9 +35,30 @@ function renderProducts() {
 function renderCart() {
  cartItems.innerHTML = "";
  if(cart.length === 0){
-    cartItems.innerHTML = "<p>Your cart is empty</p>";
-    cartTotal.innerHTML = "Total: $0.00";
-    checkoutButton.style.display = "none";
+    // cartItems.innerHTML = "<p>Your cart is empty</p>";
+    // cartTotal.innerHTML = "Total: $0.00";
+    // checkoutButton.style.display = "none";
+ }else{
+  cart.forEach(item=>{
+    const cartItem = document.createElement("div");
+    cartItem.classList.add("cart-item");
+    cartItem.innerHTML=`
+    <img src="${item.Image}" alt="">
+      <div class="cart-item-info">
+          <h2>${item.name}</h2>
+          <p>Price: ${item.price.toFixed(2)} x ${item.quantity} = TK${item.price*item.quantity}</p>
+          <div class="quantity">
+              <button class="decrease" data-id="${item.id}">-</button>
+              <span>${item.quantity}</span>
+              <button class="increase" data-id="${item.id}">+</button>
+          </div>
+          <button class="remove" data-id="${item.id}">Remove</button>
+      </div>
+    `
+
+    cartItems.appendChild(cartItem);
+  })
  }
 }
+renderCart()
 renderProducts()
