@@ -10,8 +10,8 @@ const products = [
 let cart = [];
 
 const productList=document.querySelector(".product-list");
-const cartList=document.querySelector(".cart-items");
-const cartTotal=document.querySelector(".cart-total");
+const cartItems=document.querySelector(".cart-items");
+const cartTotal=document.querySelector(".total");
 const checkoutButton=document.querySelector(".checkout");
 
 function renderProducts() {
@@ -30,5 +30,14 @@ function renderProducts() {
     productList.appendChild(productDiv);
   })
   
+}
+
+function renderCart() {
+ cartItems.innerHTML = "";
+ if(cart.length === 0){
+    cartItems.innerHTML = "<p>Your cart is empty</p>";
+    cartTotal.innerHTML = "Total: $0.00";
+    checkoutButton.style.display = "none";
+ }
 }
 renderProducts()
